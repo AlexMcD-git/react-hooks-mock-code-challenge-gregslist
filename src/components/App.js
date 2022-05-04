@@ -9,7 +9,7 @@ function App() {
   const [searchContent, setSearchContent] = useState("")
 
   useEffect(()=>{
-    fetch(URL)
+    fetch(`http://localhost:6001/listings`)
     .then(r=>r.json())
     .then(data=>setListings(data.map(listing=>{
       return {...listing, favorite: false}
@@ -40,10 +40,14 @@ function App() {
     }))
   }
 
+  function sortByLocation(){
+    setListings([...listings].sort((a,b) => (a.location>b.location)?1:((b.location>a.location)?-1:0)))
+  }
+
   console.log(listings)
   return (
     <div className="app">
-      <Header seachContent={searchContent} updateSearchContent={updateSearchContent}/>
+      <Header seachContent={searchContent} updateSearchContent={updateSearchContent} sortByLocation={sortByLocation}/>
       <ListingsContainer listings={listings.filter(listing=>{
         return listing.description.includes(searchContent)
       })}
