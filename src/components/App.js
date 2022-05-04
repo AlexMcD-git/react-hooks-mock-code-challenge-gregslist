@@ -48,9 +48,9 @@ function App() {
   return (
     <div className="app">
       <Header seachContent={searchContent} updateSearchContent={updateSearchContent} sortByLocation={sortByLocation}/>
-      <ListingsContainer listings={listings.filter(listing=>{
-        return listing.description.includes(searchContent)
-      })}
+      <ListingsContainer 
+      listings={listings} 
+      searchContent={searchContent}
       onClickFavorite={onClickFavorite} 
       onClickDelete={onClickDelete}/>
     </div>
